@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void input(int l[50],int h[50],int n);
+void print(int matrix[50][50],int n,int count);
+void init(int matrix[50][50],int n);
+int min(int a,int b);
+void comp(int matrix[50][50],int n);
+int check(int matrix[50][50],int y[50],int s[50],int i,int count);
+
+void main()
+{
+  int y[50],s[50],matrix[50][50],n,i,j,c,count=0;
+  printf("Enter the number of weeks\n");
+  scanf("%d",&n);
+  input(y,s,n);
+  init(matrix,n);
+
+  for(i=1;i<=n;i++)
+  {    
+       for(j=1;j<=n;j++)
+     {
+       if(i==j)
+       {
+       c=min(y[i],s[i]);
+       matrix[i][j]=matrix[i][j-1]+c;
+       count=check(matrix,y,s,i,count);
+       }
+       else
+       {
+       matrix[i][j]=matrix[i-1][j];
+       }
+     }       
+  }
+  print(matrix,n,count);
+}
+
+void input(int y[50],int s[50],int n)
+{
+ int i;
+ printf("Enter the operating cost of NewYork\n");
+ for(i=1;i<=n;i++)
+ {
+  scanf("%d",&y[i]);
+ }
+ printf("Enter the operating cost of SanFrancisco\n");
+ for(i=1;i<=n;i++)
+ {
+  scanf("%d",&s[i]);
+ }
+}
+void print(int matrix[50][50],int n,int count)
+{
+ int i,j,s;
+ printf("The matrix is\n");
+ for(i=0;i<=n;i++)
+ {
+  for(j=0;j<=n;j++)
+  {
+  printf("%d ",matrix[i][j]);
+  }
+  printf("\n");
+ }
+ printf("Optimal solution is %d\n",matrix[n][n]);
+ printf("Composition is ");
+ comp(matrix,n);
+ s=count*10;
+ printf("Travel expense is :%d\n",s);
+ printf("Total expense is :%d\n",matrix[n][n]+s);
+}
+void init(int matrix[50][50],int n)
+{
+int i;
+for(i=0;i<=n;i++)
+ {
+  matrix[0][i]=0;
+  matrix[i][0]=0;
+ }
+}
+int min(int a,int b)
+{
+ if(a<b&&a!=0)
+ {
+  return a;
+ }
+ else if(b!=0)
+ {
+  return b;
+ }
+}
+void comp(int matrix[50][50],int n)
+{
+  int a;
+  if(matrix[n][n]>matrix[n][n-1]&&n!=0)
+  {
+   a=matrix[n][n]-matrix[n][n-1];
+   printf("%d ",a);
+   n--;
+   comp(matrix,n);
+  }
+}
+int check(int matrix[50][50],int y[50],int s[50],int i,int count)
+{
+  int c,c1;
+  if(i>1)
+  {
+  c=matrix[i][i]-matrix[i-1][i-1];
+  c1=matrix[i-1][i-1]-matrix[i-2][i-2];
+  if(c==y[i]&&c1==s[i-1]||c==s[i]&&c1==y[i-1])
+  {
+   count+=1;
+  }
+  }
+  return count;  
+}

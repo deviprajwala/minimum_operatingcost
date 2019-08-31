@@ -1,0 +1,18 @@
+Enter the number of weeks
+Enter the operating cost of NewYork
+Enter the operating cost of SanFrancisco
+The matrix is
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 
+0 1 41 0 0 0 0 0 0 0 0 
+0 1 41 42 0 0 0 0 0 0 0 
+0 1 41 42 45 0 0 0 0 0 0 
+0 1 41 42 45 95 0 0 0 0 0 
+0 1 41 42 45 95 133 0 0 0 0 
+0 1 41 42 45 95 133 161 0 0 0 
+0 1 41 42 45 95 133 161 164 0 0 
+0 1 41 42 45 95 133 161 164 207 0 
+0 1 41 42 45 95 133 161 164 207 227 
+Optimal solution is 227
+Composition is 20 43 3 28 38 50 3 1 40 1 Travel expense is :60
+Total expense is :287

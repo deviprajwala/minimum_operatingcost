@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void input(int l[50],int h[50],int n);
+void print(int matrix[50][50],int n);
+void init(int matrix[50][50],int n);
+int min(int a,int b);
+void comp(int matrix[50][50],int n);
+
+void main()
+{
+  int y[50],s[50],matrix[50][50],n,i,j;
+  printf("Enter the number of weeks\n");
+  scanf("%d",&n);
+  input(y,s,n);
+  init(matrix,n);
+
+  for(i=1;i<=n+1;i++)
+  {    
+       for(j=1;j<=n+1;j++)
+      {
+       c=min(y[i],s[i]);
+       matrix[i][j]=matrix[i][j-1]+c;
+       
+      }
+       
+  }
+  print(matrix,n);
+}
+
+void input(int y[50],int s[50],int n)
+{
+ int i;
+ printf("Enter the operating cost of NewYork\n");
+ for(i=1;i<=n;i++)
+ {
+  scanf("%d",&y[i]);
+ }
+ printf("Enter the operating cost of SanFrancisco\n");
+ for(i=1;i<=n;i++)
+ {
+  scanf("%d",&s[i]);
+ }
+}
+void print(int matrix[50][50],int n)
+{
+ int i,j;
+ printf("The matrix is\n");
+ for(i=0;i<=n;i++)
+ {
+  for(j=0;j<=n;j++)
+  {
+  printf("%d ",matrix[i][j]);
+  }
+  printf("\n");
+ }
+ printf("Optimal solution is %d\n",matrix[n][n]);
+ printf("Composition is ");
+ comp(matrix,n);
+}
+void init(int matrix[50][50],int n)
+{
+int i;
+for(i=0;i<=n;i++)
+ {
+  matrix[0][i]=0;
+  matrix[i][0]=0;
+ }
+}
+int min(int a,int b)
+{
+ if(a<b)
+ {
+  return a;
+ }
+ else
+ {
+  return b;
+ }
+}
+void comp(int matrix[50][50],int n)
+{
+  int a;
+  if(matrix[n][n]>matrix[n][n-1]&&n!=0)
+  {
+   a=matrix[n][n]-matrix[n][n-1];
+   printf("%d ",a);
+   n--;
+   comp(matrix,n);
+  }
+}
